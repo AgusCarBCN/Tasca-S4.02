@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+div {
+	color: red;
+	font-size: 14px;
+}
+</style>
+</head>
+<body>
+	<h3>Añadir empleado</h3>
+	<form action="/agregar" th:object="${empleado}" method="post">
+		<label for="nombre">Nombre:</label> <input type="text"
+			th:field="*{nombre}" placeholder="Escribe el nombre del empleado" />
+		<div id="error" th:errors="*{nombre}"></div>
+		<label for="trabajo">Trabajo:</label> <select th:field="*{trabajo}"
+			th:value="${empleado?.trabajo}">
+			<option value="operario">operario</option>
+			<option value="administrativo">administrativo</option>
+			<option value="tecnico">tecnico</option>
+			<option value="gerente">gerente</option>
+		</select> <input type=submit name=submit value="Añadir">
+
+	</form>
+</body>
+</html>

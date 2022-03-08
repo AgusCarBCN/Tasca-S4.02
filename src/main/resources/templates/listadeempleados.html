@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+	<h1>Listado de empleados</h1>
+	<table border=1>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>NOMBRE</th>
+				<th>EMPLEO</th>
+				<th>SALARIO</th>
+				<th>ELIMINAR</th>
+				<th>CAMBIAR TRABAJO</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="emp: ${empleados}">
+				<td th:text="${emp.id}"></td>
+				<td th:text="${emp.nombre}"></td>
+				<td th:text="${emp.trabajo}"></td>
+				<td th:text="${emp.salario}"></td>
+				<td><a th:href="@{/eliminar/}+${emp.id}">eliminar</a></td>
+				<td><a th:href="@{/modificar/}+${emp.id}">cambiar trabajo</a></td>
+		</tbody>
+	</table>
+	<h3>mostrar por trabajos</h3>
+	<a th:href="@{http://localhost:8082/tecnico}">tecnicos</a>
+	<a th:href="@{http://localhost:8082/administrativo}">administrativos</a>
+	<a th:href="@{http://localhost:8082/operario}">operarios</a>
+	<a th:href="@{http://localhost:8082/gerente}">gerentes</a>
+	<a th:href="@{http://localhost:8082/}">todos</a>
+	<h3>Añadir empleado</h3>
+	<form action="/agregar" th:object="${empleado}" method="post">
+
+		<label for="nombre">Nombre:</label> <input type="text" name=nombre
+			placeholder="Escribe el nombre del empleado"  /> 
+			
+			<label for="trabajo">Trabajo:</label>
+		 
+		<select name=trabajo th:value="${empleado?.trabajo}">
+			<option value="operario">operario</option>
+			<option value="administrativo">administrativo</option>
+			<option value="tecnico">tecnico</option>
+			<option value="gerente">gerente</option>
+		</select> <input type=submit name=submit value="Añadir">
+
+	</form>
+
+
+	<h3>Cambiar trabajo de empleado</h3>
+	<form action="/modificar" method="post">
+		<label for="id">id:</label> <input type=number name=id
+			readonly="readonly" th:value="${empleado?.id}"> <label
+			for="nombre">Nombre:</label> <input type=text name=nombre
+			readonly="readonly" th:value="${empleado?.nombre}"> <label
+			for="trabajo">Trabajo:</label> <select name=trabajo
+			th:value="${empleado?.trabajo}">
+			<option value="operario">operario</option>
+			<option value="administrativo">administrativo</option>
+			<option value="tecnico">tecnico</option>
+			<option value="gerente">gerente</option>
+		</select>  <input type=submit name=submit value="Modificar">
+	</form>
+
+
+
+</body>
+</html>

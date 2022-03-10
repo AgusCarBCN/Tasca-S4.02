@@ -1,6 +1,5 @@
 package carnerero.agustin.nivell1.model;
 
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -10,14 +9,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 public class Empleado {
+
 	private static int counter;
-	
 	private Integer id;
 	@NotNull
-	@Size(min=2,message="El nombre es un campo requerido")
-	@Pattern(regexp = "[A-Z,Ñ]{1}[A-Z,a-z,ñ,\b]{1,20}",message="El nombre debe empezar por mayúsculas y contener letras")
+	@Size(min = 2, message = "El nombre es un campo requerido")
+	@Pattern(regexp = "[A-Z,Ñ]{1}[A-Z,a-z,ñ,\b]{1,20}", message = "El nombre debe empezar por mayúsculas y contener letras")
 	private String nombre;
 	private String trabajo;
 	private Double salario;
@@ -40,6 +38,5 @@ public class Empleado {
 			salario = 60000.0;
 		}
 	}
-	
-	
+
 }
